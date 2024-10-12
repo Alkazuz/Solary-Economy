@@ -29,7 +29,7 @@ public class SubCmdTop extends SubCommand {
 			for (RankAccount account : moneytop) {
 				String valor = SolaryEconomy.numberFormat(account.getBalance());
 				String accountname = account.getName();
-				if (SolaryEconomy.config.getBoolean("economy_top.prefix")) {
+				if (SolaryEconomy.config.getConfig().getBoolean("economy_top.prefix")) {
 					Plugin vault = Bukkit.getPluginManager().getPlugin("Vault");
 					if (vault != null)
 						accountname = VaultChat.getPrefix(account.getName()).concat(account.getName());
@@ -38,7 +38,7 @@ public class SubCmdTop extends SubCommand {
 				if (i == 1) {
 
 					String display = accountname;
-					boolean use_magnata = SolaryEconomy.config.getBoolean("magnata_tag");
+					boolean use_magnata = SolaryEconomy.config.getConfig().getBoolean("magnata_tag");
 					if (use_magnata) {
 						String magnata_tag = SolaryEconomy.messages.get("MAGNATA_TAG");
 						if (magnata_tag == null)

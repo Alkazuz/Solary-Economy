@@ -23,7 +23,7 @@ public class RefreshMoneyTop {
 			}
 		};
 
-		long refreshTime = (SolaryEconomy.config.getLong("economy_top.refresh_time") * 20);
+		long refreshTime = (SolaryEconomy.config.getConfig().getLong("economy_top.refresh_time") * 20);
 
 		this.bukkitRunnable.runTaskTimerAsynchronously(SolaryEconomy.getInstance(), refreshTime, refreshTime);
 

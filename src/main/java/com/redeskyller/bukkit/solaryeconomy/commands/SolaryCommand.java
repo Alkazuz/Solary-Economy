@@ -49,7 +49,7 @@ public class SolaryCommand implements CommandExecutor {
 		if (sender instanceof Player)
 			if (!SolaryEconomy.economia.existsAccount(sender.getName()))
 				SolaryEconomy.economia.createAccount(sender.getName(),
-						new BigDecimal(SolaryEconomy.config.getDouble("start_value")));
+						new BigDecimal(SolaryEconomy.config.getConfig().getDouble("start_value")));
 		if (args.length >= 1) {
 			String arg = args[0].toLowerCase();
 			if (!this.subcommands.isEmpty())

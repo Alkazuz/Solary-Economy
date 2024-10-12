@@ -1,0 +1,11 @@
+name: "Solary-Economy"
+main: "com.redeskyller.bukkit.solaryeconomy.SolaryEconomy"
+version: "1.5.2"
+description: "Um sistema de economia para seu servidor Minecraft."
+author: "Sr_Edition"
+softdepend: ["Vault", "LegendChat", "PlaceholderAPI"]
+load: "STARTUP"
+commands:
+  money:
+    description: "Para ver o saldo atual"
+    aliases: [coin, coins, solaryeconomy]

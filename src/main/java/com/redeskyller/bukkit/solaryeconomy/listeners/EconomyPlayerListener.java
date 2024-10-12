@@ -15,7 +15,7 @@ public class EconomyPlayerListener implements Listener {
 	public void onJoin(PlayerJoinEvent event)
 	{
 		if (!economia.existsAccount(event.getPlayer().getName())) {
-			economia.createAccount(event.getPlayer().getName(), new BigDecimal(config.getDouble("start_value")));
+			economia.createAccount(event.getPlayer().getName(), new BigDecimal(config.getConfig().getDouble("start_value")));
 		}else {
 			
 		}

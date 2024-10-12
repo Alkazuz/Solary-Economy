@@ -26,7 +26,6 @@ import com.redeskyller.bukkit.solaryeconomy.commands.SolaryCommand;
 import com.redeskyller.bukkit.solaryeconomy.database.Database;
 import com.redeskyller.bukkit.solaryeconomy.database.MySQL;
 import com.redeskyller.bukkit.solaryeconomy.database.SQLite;
-import com.redeskyller.bukkit.solaryeconomy.hook.PlaceholdersHook;
 import com.redeskyller.bukkit.solaryeconomy.hook.VaultEconomy;
 import com.redeskyller.bukkit.solaryeconomy.listeners.EconomyPlayerListener;
 import com.redeskyller.bukkit.solaryeconomy.runnables.RefreshMoneyTop;
@@ -53,23 +52,25 @@ public class SolaryEconomy extends JavaPlugin {
 	{
 		instance = this;
 
-		config = new Configuration(this, new File(getDataFolder(), "config.yml")).load();
+		config = new Configuration(this, new File(getDataFolder(), "config.yml"));
+		config.load();
 
 		setupDatabase();
 
-		messages = new Messages(this).load();
+		messages = new Messages(this);
+		messages.load();
 		economia = new Economia().load();
 		refreshMoneyTop = new RefreshMoneyTop().load();
 
-		if (config.getBoolean("use_vault"))
+		if (config.getConfig().getBoolean("use_vault"))
 			setupVault();
 
 		getServer().getPluginManager().registerEvents(new EconomyPlayerListener(), getInstance());
 
 		getCommand("money").setExecutor(new SolaryCommand("money"));
 
-		if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null)
-			PlaceholdersHook.install();
+		/*if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null)
+			PlaceholdersHook.install();*/
 
 		checkUpdate();
 	}
@@ -98,7 +99,9 @@ public class SolaryEconomy extends JavaPlugin {
 			}
 
 			database.execute(
-					"CREATE TABLE IF NOT EXISTS " + tableName + " (name varchar(40), valor text, toggle int);");
+					"CREATE TABLE IF NOT EXISTS " + tableName + " (name varchar(40), " +
+							"name_lower varchar(40), " +
+							"valor DOUBLE DEFAULT 0, toggle int);");
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -134,9 +137,9 @@ public class SolaryEconomy extends JavaPlugin {
 		formated += decimalFormat.format(bigDecimal);
 
 		if ((doubleValue >= -1) && (doubleValue <= 1))
-			formated += " " + config.getString("currency_name.singular");
+			formated += " " + config.getConfig().getString("currency_name.singular");
 		else
-			formated += " " + config.getString("currency_name.plural");
+			formated += " " + config.getConfig().getString("currency_name.plural");
 
 		return formated;
 	}

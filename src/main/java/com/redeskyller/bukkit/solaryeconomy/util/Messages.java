@@ -16,14 +16,15 @@ public class Messages {
 
 	public Messages load()
 	{
-		this.config = new Configuration(this.plugin, new File(this.plugin.getDataFolder(), "mensagens.yml")).load();
+		this.config = new Configuration(this.plugin, new File(this.plugin.getDataFolder(), "mensagens.yml"));
+		this.config.load();
 		return this;
 	}
 
 	public String get(String string)
 	{
 		string = string.toUpperCase();
-		return this.config.getString(string).replace("&", "§");
+		return this.config.getConfig().getString(string).replace("&", "§");
 	}
 
 }

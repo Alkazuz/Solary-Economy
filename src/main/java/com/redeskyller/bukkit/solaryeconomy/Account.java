@@ -10,6 +10,7 @@ public class Account {
 
 	private final String name;
 	private BigDecimal balance;
+	private String nameLowerCase;
 	private boolean toggle;
 
 	public Account(final String nome)
@@ -25,6 +26,7 @@ public class Account {
 	public Account(final String nome, final BigDecimal balance, final boolean toggle)
 	{
 		this.name = nome;
+		this.nameLowerCase = nome.toLowerCase();
 		this.balance = balance;
 		this.toggle = toggle;
 	}

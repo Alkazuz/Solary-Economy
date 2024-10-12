@@ -24,7 +24,7 @@ public class SubCmdMagnata extends SubCommand {
 		if (account != null) {
 			String accountname = account.getName();
 			String valor = SolaryEconomy.numberFormat(account.getBalance());
-			if (SolaryEconomy.config.getBoolean("economy_top.prefix")) {
+			if (SolaryEconomy.config.getConfig().getBoolean("economy_top.prefix")) {
 				Plugin vault = Bukkit.getPluginManager().getPlugin("Vault");
 				if (vault != null)
 					accountname = VaultChat.getPrefix(account.getName()).concat(account.getName());

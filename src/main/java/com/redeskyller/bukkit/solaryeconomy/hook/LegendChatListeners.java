@@ -18,7 +18,7 @@ public class LegendChatListeners implements Listener {
 		if (event.isCancelled())
 			return;
 
-		boolean use_magnata = SolaryEconomy.config.getBoolean("magnata_tag");
+		boolean use_magnata = SolaryEconomy.config.getConfig().getBoolean("magnata_tag");
 		if (use_magnata) {
 			String magnata_tag = SolaryEconomy.messages.get("MAGNATA_TAG");
 			if (magnata_tag == null)

@@ -79,6 +79,7 @@ public class Economia {
 
 	public boolean hasBalance(String name, BigDecimal balance)
 	{
+		name = name.toLowerCase();
 		try {
 			return this.accounts.get(name).getBalance().doubleValue() >= balance.doubleValue();
 		} catch (Exception exception) {
@@ -100,7 +101,7 @@ public class Economia {
 
 	public boolean existsAccount(String name)
 	{
-		return this.accounts.containsKey(name);
+		return this.accounts.containsKey(name.toLowerCase());
 	}
 
 	public boolean isToggle(String name)
@@ -172,8 +173,8 @@ public class Economia {
 		try {
 
 			ResultSet resultSet = database.query("SELECT * FROM " + tableName.concat(" WHERE LENGTH(name) <= "
-					+ config.getInt("economy_top.name_size") + " ORDER BY CAST(valor AS DECIMAL) DESC LIMIT "
-					+ config.getInt("economy_top.size") + ";"));
+					+ config.getConfig().getInt("economy_top.name_size") + " ORDER BY CAST(valor AS DECIMAL) DESC LIMIT "
+					+ config.getConfig().getInt("economy_top.size") + ";"));
 
 			while (resultSet.next())
 				try {
@@ -184,10 +185,10 @@ public class Economia {
 					this.moneytop.add(rankAccount);
 					if (this.magnata == null) {
 						this.magnata = rankAccount;
-						if ((!lastmagnata.equals(rankAccount.getName())) && config.getBoolean("magnata_broadcast")) {
+						if ((!lastmagnata.equals(rankAccount.getName())) && config.getConfig().getBoolean("magnata_broadcast")) {
 							String accountname = rankAccount.getName();
 							String valor = SolaryEconomy.numberFormat(rankAccount.getBalance());
-							if (config.getBoolean("economy_top.prefix")) {
+							if (config.getConfig().getBoolean("economy_top.prefix")) {
 								Plugin vault = Bukkit.getPluginManager().getPlugin("Vault");
 								if (vault != null)
 									accountname = VaultChat.getPrefix(rankAccount.getName())

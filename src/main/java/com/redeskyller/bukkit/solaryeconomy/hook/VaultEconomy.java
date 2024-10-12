@@ -32,7 +32,7 @@ public class VaultEconomy implements Economy {
 	public boolean createPlayerAccount(String name)
 	{
 		return SolaryEconomy.economia.createAccount(name,
-				new BigDecimal(SolaryEconomy.config.getDouble("start_value")));
+				new BigDecimal(SolaryEconomy.config.getConfig().getDouble("start_value")));
 	}
 
 	@Override
@@ -56,13 +56,13 @@ public class VaultEconomy implements Economy {
 	@Override
 	public String currencyNamePlural()
 	{
-		return SolaryEconomy.config.getString("currency_name.plural");
+		return SolaryEconomy.config.getConfig().getString("currency_name.plural");
 	}
 
 	@Override
 	public String currencyNameSingular()
 	{
-		return SolaryEconomy.config.getString("currency_name.singular");
+		return SolaryEconomy.config.getConfig().getString("currency_name.singular");
 	}
 
 	@Override

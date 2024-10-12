@@ -28,7 +28,7 @@ public class VaultChat {
 						else
 							prefix = chat
 									.getPlayerPrefix(
-											SolaryEconomy.config.getString(
+											SolaryEconomy.config.getConfig().getString(
 													SolaryEconomy.getInstance().getConfig().getString("world")),
 											playerName)
 									.replace("&", "§");
